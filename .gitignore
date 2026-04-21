@@ -1,3 +1,9 @@
+# Claude Code local config
+.claude/
+
+# Internal working documents (not for public repo)
+*.md
+
 # Logs
 logs
 *.log

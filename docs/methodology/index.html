@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Framework — AI Apprenticeship</title>
+  <meta name="description" content="Five stages for building real things with AI. The reasoning behind each one, how the stages connect, and the learning design underneath.">
+  <link rel="stylesheet" href="../shared/style.css">
+  <style>
+
+    /* ============================================================
+       Framework stages — full detail layout
+    ============================================================ */
+
+    .framework-stages {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-16);
+      margin-top: var(--space-12);
+    }
+
+    .framework-stage {
+      display: grid;
+      grid-template-columns: 4rem 1fr;
+      gap: var(--space-8);
+    }
+
+    .framework-stage__number {
+      font-family: var(--font-serif);
+      font-size: var(--text-5xl);
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+      padding-top: var(--space-1);
+    }
+
+    .framework-stage__name {
+      font-family: var(--font-serif);
+      font-size: var(--text-2xl);
+      font-weight: 400;
+      color: var(--light-text);
+      margin-bottom: var(--space-2);
+      line-height: var(--leading-snug);
+    }
+
+    .framework-stage__body p {
+      font-size: var(--text-base);
+      line-height: var(--leading-relaxed);
+      color: var(--light-text-muted);
+      max-width: 60ch;
+    }
+
+    .framework-stage__body p + p {
+      margin-top: var(--space-4);
+    }
+
+    .key-principle {
+      margin-top: var(--space-6);
+      margin-bottom: var(--space-6);
+      padding: var(--space-4) var(--space-5);
+      background-color: var(--light-surface);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+
+    .key-principle__label {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: var(--space-2);
+    }
+
+    .key-principle p {
+      font-size: var(--text-sm) !important;
+      color: var(--light-text) !important;
+      line-height: var(--leading-relaxed);
+      max-width: none !important;
+    }
+
+    /* ============================================================
+       Two-level diagram / callout
+    ============================================================ */
+
+    .two-level-callout {
+      margin-top: var(--space-10);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+      max-width: 70ch;
+    }
+
+    .two-level-card {
+      padding: var(--space-5) var(--space-6);
+      border: 1px solid var(--light-border);
+      border-radius: var(--radius-md);
+      background-color: var(--light-surface);
+    }
+
+    .two-level-card__label {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: var(--space-2);
+    }
+
+    .two-level-card__heading {
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--light-text);
+      margin-bottom: var(--space-2);
+    }
+
+    .two-level-card p {
+      font-size: var(--text-sm);
+      color: var(--light-text-muted);
+      line-height: var(--leading-relaxed);
+    }
+
+    @media (max-width: 600px) {
+      .two-level-callout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================================
+       Learning design section
+    ============================================================ */
+
+    .learning-design-grid {
+      margin-top: var(--space-10);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+      max-width: 72ch;
+    }
+
+    .learning-design-item {
+      padding: var(--space-5);
+      background-color: var(--light-surface);
+      border: 1px solid var(--light-border);
+      border-radius: var(--radius-md);
+    }
+
+    .learning-design-item__label {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: var(--tracking-widest);
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: var(--space-2);
+    }
+
+    .learning-design-item p {
+      font-size: var(--text-sm);
+      color: var(--light-text-muted);
+      line-height: var(--leading-relaxed);
+    }
+
+    @media (max-width: 600px) {
+      .learning-design-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ============================================================
+       Persistent tools section
+    ============================================================ */
+
+    .persistent-tools {
+      margin-top: var(--space-10);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      max-width: 70ch;
+    }
+
+    .persistent-tool-item {
+      padding: var(--space-5) var(--space-6);
+      background-color: var(--dark-surface);
+      border: 1px solid var(--dark-border);
+      border-radius: var(--radius-md);
+    }
+
+    .persistent-tool-item__name {
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--dark-text);
+      margin-bottom: var(--space-2);
+    }
+
+    .persistent-tool-item p {
+      font-size: var(--text-sm);
+      color: var(--dark-text-muted);
+      line-height: var(--leading-relaxed);
+    }
+
+    /* ============================================================
+       Responsive
+    ============================================================ */
+
+    @media (max-width: 640px) {
+      .framework-stage {
+        grid-template-columns: 2.5rem 1fr;
+        gap: var(--space-4);
+      }
+      .framework-stage__number {
+        font-size: var(--text-4xl);
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <div class="page-header">
+    <h1 style="text-align: center;">The Framework</h1>
+      </div>
+
+  <main>
+
+    <!-- ============================================================
+         LEARNING DESIGN
+    ============================================================ -->
+    <section class="section-light" id="learning-design" aria-labelledby="learning-design-heading">
+      <div class="section-inner section-inner--wide">
+
+        <span class="section-label">The Learning Design</span>
+        <h2 id="learning-design-heading">How capability develops through the process</h2>
+        <p style="color: var(--light-text-muted); font-size: var(--text-lg); line-height: var(--leading-relaxed); max-width: 58ch; margin-top: var(--space-4);">The framework is built on cognitive apprenticeship, a model from learning science in which novices develop expert capability by working through real problems alongside structured guidance that makes expert thinking visible.</p>
+
+        <p style="color: var(--light-text-muted); font-size: var(--text-lg); line-height: var(--leading-relaxed); max-width: 58ch; margin-top: var(--space-4);">The structure of the stages, the way each stage surfaces questions before providing answers, the requirement to articulate reasoning at every gate, the session pattern that begins with a pre-session check: these are all part of a situated learning environment in which the project is the curriculum.</p>
+
+        <div class="learning-design-grid" style="margin-top: var(--space-10);">
+
+          <div class="learning-design-item">
+            <span class="learning-design-item__label">Modeling</span>
+            <p>Each stage surfaces the questions an experienced builder would ask before proceeding. Expert thinking is made visible for users to internalize and adopt.</p>
+          </div>
+
+          <div class="learning-design-item">
+            <span class="learning-design-item__label">Coaching at Scale</span>
+            <p>The AI responds to the specifics of your project, your constraints, and your decisions. Rather than delivering a course, it is coaching a particular person through a particular problem.</p>
+          </div>
+
+          <div class="learning-design-item">
+            <span class="learning-design-item__label">Scaffolded Learning</span>
+            <p>The five-stage structure distributes cognitive load across the project arc. Each stage reduces the problem to one layer. You are never solving everything at once.</p>
+          </div>
+
+          <div class="learning-design-item">
+            <span class="learning-design-item__label">Articulation</span>
+            <p>The stage gates require you to express your reasoning explicitly: your constraints, your priorities, your architectural decisions. Articulation is the mechanism by which thinking becomes precise.</p>
+          </div>
+
+          <div class="learning-design-item">
+            <span class="learning-design-item__label">Reflection</span>
+            <p>The Decision Journal, session logs, and stage completion gates require you to account for your choices. Reflection is built into the cadence, creating opportunities for iterative improvement.</p>
+          </div>
+
+          <div class="learning-design-item">
+            <span class="learning-design-item__label">Exploration</span>
+            <p>The framework provides structure, not scripts. Within each stage, you direct the conversation with your AI tool. The questions are yours. The decisions are yours.</p>
+          </div>
+
+        </div>
+
+        <p style="color: var(--light-text-muted); font-size: var(--text-sm); line-height: var(--leading-relaxed); max-width: 60ch; margin-top: var(--space-8); font-style: italic;">The capability that develops through this process is a better way of working with AI. The user develops a practiced set of instincts for knowing what question to ask next, how to evaluate the answer, and when to push back. That transfers to every future project, in any domain.</p>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         HORA / TEMPUS CALLOUT
+    ============================================================ -->
+    <section class="section-dark" id="hora-name" aria-label="Why the App Is Named Hora">
+      <div class="section-inner">
+
+        <span class="section-label">The Name</span>
+        <h2 style="color: var(--dark-text, #F5F0E8); max-width: 24ch;">Why the app is named Hora</h2>
+        <p style="color: var(--dark-text-muted, #BDB5AC); font-size: var(--text-base); line-height: var(--leading-relaxed); max-width: 58ch; margin-top: var(--space-4);">The name comes from Donella Meadows' "Thinking in Systems," a book that shaped much of the thinking behind this framework. In Chapter 3, Meadows retells a fable about two watchmakers.</p>
+
+        <blockquote style="margin-top: var(--space-8); margin-bottom: var(--space-8); max-width: 56ch; font-size: var(--text-xl);">
+          Hora's watches were no less complex than those of Tempus, but he put together stable subassemblies of about ten elements each. Whenever Hora had to put down a partly completed watch to answer the phone, he lost only a small part of his work. So he made his watches much faster and more efficiently than did Tempus.
+          <cite style="display: block; margin-top: var(--space-4); font-family: var(--font-sans); font-style: normal; font-size: var(--text-sm); color: var(--dark-text-muted, #BDB5AC);">Donella Meadows, "Thinking in Systems" (2008)</cite>
+        </blockquote>
+
+        <p style="color: var(--dark-text-muted, #BDB5AC); font-size: var(--text-base); line-height: var(--leading-relaxed); max-width: 58ch;">Tempus builds in sequence from a thousand parts. Every interruption costs him everything. Hora builds in stable subassemblies. Interruptions cost him almost nothing. The same principle applies to any complex project worked on across many sessions, often interrupted, always evolving.</p>
+        <p style="color: var(--dark-text-muted, #BDB5AC); font-size: var(--text-base); line-height: var(--leading-relaxed); max-width: 58ch; margin-top: var(--space-4);">The entire framework -- but especially Stage 5 --  is built around this idea. Each session closes with a decision log, an accomplishment note, and a plan update. The project context document captures the full state of the work. When you return after a week, or a month, or six months, Hora can reconstruct exactly where you were.</p>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         THE TWO LEVELS
+    ============================================================ -->
+    <section class="section-light" id="two-levels" aria-labelledby="two-levels-heading">
+      <div class="section-inner section-inner--wide">
+
+        <span class="section-label">How It's Structured</span>
+        <h2 id="two-levels-heading">Two levels of practice, one continuous process.</h2>
+        <p style="color: var(--light-text-muted); font-size: var(--text-lg); line-height: var(--leading-relaxed); max-width: 56ch; margin-top: var(--space-4);">The framework operates at two levels. Stages 1 through 4 run once per project and establish its foundation. Stage 5 runs continuously for as long as the project is active.</p>
+
+        <div class="two-level-callout">
+          <div class="two-level-card">
+            <span class="two-level-card__label">Stages 1–4</span>
+            <p class="two-level-card__heading">Project Arc</p>
+            <p>Completed once per project. Defines the problem, scopes the work, designs the architecture, and produces a phased build plan. It's the foundation everything else builds on.</p>
+          </div>
+          <div class="two-level-card">
+            <span class="two-level-card__label">Stage 5</span>
+            <p class="two-level-card__heading">Session Loop</p>
+            <p>The recurring execution environment. Each session starts with a briefing, runs a focused build effort, and closes with a decision log and plan review. Repeated across weeks and months.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         THE FIVE STAGES
+    ============================================================ -->
+    <section class="section-light" id="five-stages" aria-labelledby="stages-heading">
+      <div class="section-inner section-inner--wide">
+
+        <span class="section-label">The Five Stages</span>
+        <h2 id="stages-heading">What each stage is for.</h2>
+
+        <div class="framework-stages">
+
+          <!-- Stage 1 -->
+          <div class="framework-stage" id="stage-1">
+            <div class="framework-stage__number" aria-hidden="true">1</div>
+            <div class="framework-stage__body">
+              <h3 class="framework-stage__name">Problem Definition</h3>
+              <p>Most projects start with a solution already in mind. "I want to build a dashboard." "I want to automate this process." This stage starts one step earlier: with the frustrations that make a solution necessary.</p>
+              <p>The work here is tracing symptoms back to causes and distilling what you find into a precise problem statement. That statement is not a deliverable to be filed away. It is the reference point for every decision in every stage that follows. A vague problem statement produces a solution that solves the wrong thing. A precise one focuses the entire project.</p>
+              <p>The AI's role in this stage is interrogation, not generation. It asks questions you haven't considered, surfaces assumptions you haven't examined, and reflects your reasoning back to you in ways that expose where it is thin. The output is yours.</p>
+              <div class="key-principle">
+                <span class="key-principle__label">What the stage produces</span>
+                <p>A Problem Definition Document: a structured account of the problem's domain, root causes, constraints, prior attempts, and the goal a solution must achieve. This document becomes context for every subsequent stage.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stage 2 -->
+          <div class="framework-stage" id="stage-2">
+            <div class="framework-stage__number" aria-hidden="true">2</div>
+            <div class="framework-stage__body">
+              <h3 class="framework-stage__name">Constraint and Scope</h3>
+              <p>Before thinking about features, the framework requires defining what the solution cannot be. Constraints are not limitations on ambition. They are design decisions that shape the solution space before any feature discussions begin. Privacy requirements, hosting preferences, maintenance tolerance, time available: each one rules out categories of solutions and focuses creative energy on what remains.</p>
+              <p>Feature prioritization follows from constraints. The framework uses a three-tier approach: the minimum viable product (the smallest version that genuinely solves the core problem), the complete product (the full intended scope), and best-in-class (what would make it exceptional). Building out from minimum viable rather than trimming down from best-in-class produces cleaner scope decisions and a clearer first target.</p>
+              <div class="key-principle">
+                <span class="key-principle__label">What the stage produces</span>
+                <p>A Constraint and Scope Document: hard limits that any solution must respect, a tiered feature list, and a clear definition of what the MVP must do. This document is carried into Stage 3 as the governing filter for architecture decisions.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stage 3 -->
+          <div class="framework-stage" id="stage-3">
+            <div class="framework-stage__number" aria-hidden="true">3</div>
+            <div class="framework-stage__body">
+              <h3 class="framework-stage__name">Architecture Design</h3>
+              <p>This is the stage where the relationship between the human and the AI is most explicitly a working partnership. The AI brings deep technical knowledge. You bring the problem context, the constraints, and the judgment. Neither substitutes for the other.</p>
+              <p>The framework insists on understanding the reasoning behind every recommendation before committing to it. The goal is something you can describe to someone else, modify in the future, and debug when something breaks, even if you have never built anything like it before.</p>
+              <p>Architecture conversations in this framework are tailored to how you plan to build. Someone using a coding agent, a vibe-coding platform, and a chat tool are having fundamentally different architecture conversations. Stage 3 adapts accordingly.</p>
+              <div class="key-principle">
+                <span class="key-principle__label">What the stage produces</span>
+                <p>An Architecture Design Document: the technical approach, the tools and stack, the key decisions made and the reasoning behind them. Carried into Stage 4 as the basis for build planning.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stage 4 -->
+          <div class="framework-stage" id="stage-4">
+            <div class="framework-stage__number" aria-hidden="true">4</div>
+            <div class="framework-stage__body">
+              <h3 class="framework-stage__name">Build Planning</h3>
+              <p>Before building anything, the framework requires reviewing what you've decided and building a plan that reflects it. Stage 4 starts with a structured review of the outputs from Stages 1 through 3. This serves as a check against the drift that tends to accumulate between stages.</p>
+              <p>The build plan that emerges from this stage is phased, specific to your build tool, and grounded in the constraints established in Stage 2. It names what gets built in what order, why that order, and what the completion criteria for each phase are. This document is what Stage 5 works from, and it is designed to be revised rather than abandoned when the plan meets reality.</p>
+              <div class="key-principle">
+                <span class="key-principle__label">What the stage produces</span>
+                <p>A Build Plan: phased, sequenced, and scoped to the MVP first. Carried into Stage 5 as the working checklist for the entire build.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stage 5 -->
+          <div class="framework-stage" id="stage-5">
+            <div class="framework-stage__number" aria-hidden="true">5</div>
+            <div class="framework-stage__body">
+              <h3 class="framework-stage__name">Build Execution</h3>
+              <p>Stage 5 is different from the others. It does not run once. It runs every time you sit down to work on the project, for as long as the project is active. Days. Weeks. Months. As many sessions as the build requires.</p>
+              <p>Each session follows a deliberate pattern. Before building, you generate a session briefing: a structured prompt that gives your AI tool full project context, identifies the current phase and goal, and ends with a question about what the AI sees that you might have missed. You read the response before you build anything. Sessions that start with that exchange consistently surface risks and gaps that would otherwise be discovered much later, at higher cost.</p>
+              <p>After building, you log what was accomplished, record any decisions made during the session, and note anything that changed in the plan. These records accumulate into a project history that makes every subsequent session faster and more coherent. They also make it possible to return to a project after a break without reconstructing context from memory.</p>
+              <p>The plan itself is a living document. Features are marked complete, changed, or removed as the build progresses. When something in the plan changes, a note explains why. The plan is a working record of the project's current state and direction.</p>
+              <div class="key-principle">
+                <span class="key-principle__label">The session pattern</span>
+                <p>Start with a briefing, ask what you haven't considered, build, log what happened, record decisions, update the plan. Repeated across every session for the life of the project.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         PERSISTENT TOOLS
+    ============================================================ -->
+    <section class="section-dark" id="persistent-tools" aria-labelledby="persistent-tools-heading">
+      <div class="section-inner section-inner--wide">
+
+        <span class="section-label">Beyond the Stages</span>
+        <h2 id="persistent-tools-heading" style="color: var(--dark-text, #F5F0E8);">Two tools that run the length of the project.</h2>
+        <p style="color: var(--dark-text-muted, #BDB5AC); font-size: var(--text-lg); line-height: var(--leading-relaxed); max-width: 56ch; margin-top: var(--space-4);">The five stages produce documents. These two tools are not stage outputs. They are the project's memory.</p>
+
+        <div class="persistent-tools">
+
+          <div class="persistent-tool-item">
+            <p class="persistent-tool-item__name">Decision Journal</p>
+            <p>Every significant decision made during the project is logged here, including what was decided, why, and what alternatives were considered. Decisions are captured in three ways: via a persistent log-decision button available at any stage, through a structured prompt at the close of any AI session, and by recording the choices made during Stage 3 and 4 conversations.</p>
+            <p style="margin-top: var(--space-3);">The journal has two functions. First, logged decisions are context for future sessions, and a record of what was considered prevents relitigating settled questions. Second, articulating a decision clearly enough to write it down is a form of reflection that strengthens the reasoning process itself. Over the course of a project, the journal becomes a record of how you think.</p>
+          </div>
+
+          <div class="persistent-tool-item">
+            <p class="persistent-tool-item__name">Notes</p>
+            <p>A freeform space for observations, ideas, and questions that do not fit anywhere else. Notes are not tied to a stage or a session. They exist for the things you want to capture in the moment and return to later: a design question that surfaced during a build session, a scope idea you want to revisit after the MVP, an observation about what is and isn't working.</p>
+            <p style="margin-top: var(--space-3);">Notes keep the project journal from becoming a graveyard of unsorted thoughts. They give you a place to think without committing to a decision or interrupting the build.</p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SEE IT APPLIED
+    ============================================================ -->
+    <section class="section-light" id="see-it-applied" aria-labelledby="see-it-applied-heading">
+      <div class="section-inner">
+
+        <span class="section-label">See It Applied</span>
+        <h2 id="see-it-applied-heading">Four projects. Each one built with this framework.</h2>
+        <p style="color: var(--light-text-muted); font-size: var(--text-lg); line-height: var(--leading-relaxed); max-width: 52ch; margin-top: var(--space-4);">The projects page documents what was built using this framework, how each project was scoped, and what each one is meant to do. The framework's claims are grounded in these applications, not in the framework itself.</p>
+
+        <a href="../projects/index.html" class="btn btn-primary" style="margin-top: var(--space-8); display: inline-block;">See the projects</a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="../shared/libs/marked.min.js"></script>
+  <script src="../shared/shell.js"></script>
+  <script>Shell.init('methodology');</script>
+
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects — AI Apprenticeship</title>
+  <meta name="description" content="Three working applications built using the AI Apprenticeship framework: Portfolio Atlas, Phonics App, and DinnerReady!. Real problems, real software, built start to finish.">
+  <link rel="stylesheet" href="../shared/style.css">
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <div class="page-header">
+    <h1 style="text-align: center;">Completed Projects</h1>
+  </div>
+
+  <main>
+
+    <!-- ============================================================
+         PORTFOLIO ATLAS
+    ============================================================ -->
+    <section class="section-light project-section" id="portfolio-atlas" aria-labelledby="pa-heading">
+      <div class="section-inner section-inner--wide">
+
+        <span class="section-label">Financial Planning</span>
+        <h2 id="pa-heading" class="project-section__title">Portfolio Atlas</h2>
+
+        <div class="project-section__summary">
+          <dl>
+            <dt>Deliverable:</dt>
+            <dd>Locally hosted web app powered by Streamlit</dd>
+            <dt>Tech Stack:</dt>
+            <dd>Python + SQLite + Streamlit + yfinance + Plotly</dd>
+            <dt>Built with:</dt>
+            <dd>Claude Code (Pro Plan) + ChatGPT (free tier)</dd>
+          </dl>
+        </div>
+
+        <div class="project-section__prose">
+          <p>Most investors who've grown past the basics run into the same wall. The portfolio is spread across various institutions. There's no single view of what you actually own, just a set of disconnected account summaries that require effort to mentally assemble and can't tell you anything about performance, risk, or where you actually stand relative to retirement.</p>
+          <p>Commercial aggregation tools address this, partially. The familiar ones require live connections to financial institutions. Those connections break. The reporting is shallow. The metrics are standard issue. Customization is minimal, and the features that might be genuinely useful are either absent or paywalled behind a subscription that isn't justified by the value delivered.</p>
+          <p>Spreadsheets fill the gap for a while. They're adequate for basic tracking, but they become brittle with added complexity. Running something like a retirement projection requires modeling multiple market scenarios, Social Security timing, different withdrawal strategies, and the tradeoffs around contribution stop ages, simultaneously and interactively. Formulas weren't designed for this.</p>
+          <p>The goal for Portfolio Atlas was a system capable of answering the investment questions that really matter: whether the current trajectory is sufficient, what the cost of different decisions might be, and where the real risks are.</p>
+        </div>
+
+        <div class="project-section__screenshots">
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/Portfolio%20Atlas/PA_demo_homepage.png" alt="Portfolio Atlas dashboard homepage">
+            <figcaption>The homepage dashboard gives a snapshot view of the whole portfolio and progress toward every investor's ultimate goal: financial independence.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/Cont_stop_sweep.png" alt="Contribution stop sweep analysis">
+            <figcaption>Use a slider to see how changes in the amount you save each year will impact the age you can stop contributing and still retire comfortably (Coast FIRE Age), how long your money would last if you stopped working today (Freedom Years), and the earliest realistic retirement age given your current portfolio.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/Portfolio%20Atlas/PA_demo_performance.png" alt="Portfolio Atlas performance view">
+            <figcaption>Evaluate the effectiveness of your overall investment strategy with advanced risk and return metrics.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/Portfolio%20Atlas/PA_demo_contribution-tracker.png" alt="Contribution tracker">
+            <figcaption>Automated contribution tracking makes it easy to maximize benefits and ensure tax compliance.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/Portfolio%20Atlas/PA_demo_account-type.png" alt="Account type breakdown">
+            <figcaption>A clear picture of your holdings and portfolio composition</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/Portfolio%20Atlas/PA_demo_events%26phases.png" alt="Events and phases view">
+            <figcaption>The scenario builder, life events, and spending phase modelers create richer, more reliable simulations.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/Portfolio%20Atlas/PA_demo_RothConversion.png" alt="Roth conversion analysis">
+            <figcaption>Optimize your tax strategy and maximize your wealth with advanced financial planning and modeling tools in the Tax Center.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/Portfolio%20Atlas/PA_demo_RMD.png" alt="Required minimum distributions view">
+            <figcaption>In-depth projections provide the data you need for better long-term financial decisions.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/Portfolio%20Atlas/PA_demo_export.png" alt="Export view">
+            <figcaption>All data is stored locally on your device for security and privacy. Easy back-ups ensure your data is never lost. Generate custom reports to share with financial professionals or family members.</figcaption>
+          </figure>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         PHONICS APP
+    ============================================================ -->
+    <section class="section-light project-section" id="phonics-app" aria-labelledby="phonics-heading">
+      <div class="section-inner section-inner--wide">
+
+        <span class="section-label">Education</span>
+        <h2 id="phonics-heading" class="project-section__title">Phonics App</h2>
+
+        <div class="project-section__summary">
+          <dl>
+            <dt>Deliverable:</dt>
+            <dd>iPad-optimized React/Vite SPA deployed via Vercel</dd>
+            <dt>Tech Stack:</dt>
+            <dd>React + Vite + JavaScript/TypeScript + Vercel (hosting/CI) + ESLint</dd>
+            <dt>Built with:</dt>
+            <dd>Claude Code (Pro Plan) + ChatGPT (free tier)</dd>
+          </dl>
+        </div>
+
+        <div class="project-section__prose">
+          <p>Most phonics apps work the same way. A learner moves through a sequence. When they struggle, they stay on the struggling step until they get it right enough to advance. The next lesson is always the next lesson in the list. This works for learners who happen to track well against the designed sequence. It does not work for learners who don't.</p>
+          <p>The gap isn't visible to the app. It can't be, because linear progression doesn't produce the data needed to see it. A child who understands vowel sounds in isolation but loses that understanding when consonant blends are added needs something different than repetition of the same lesson. Science of Reading research has documented this for decades. Most apps haven't built for it.</p>
+          <p>The Phonics App separates phonemic awareness from phonics instruction and tracks them as distinct skills. When a learner's performance degrades, the adaptive engine reroutes them, silently, to a lesson better matched to where the gap actually is. From the learner's perspective, the app just continues. There is no "you failed, try again." There is only the right next thing.</p>
+          <p>The parent dashboard was built around the questions that actually matter at home: which specific sounds are solidly learned, which are fragile, which phoneme pairs are being confused, and what to do about it. The coaching prompts are specific, not generic. They reflect what the data shows, not what the developers guessed might be useful to know.</p>
+        </div>
+
+        <div class="project-section__screenshots">
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/PhonicsApp/phonics-app-curriculum.png" alt="Phonics App curriculum overview">
+            <figcaption>A comprehensive phonics curriculum based on Science of Reading principles and validated by language educators.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/PhonicsApp/phonics-app-exercise1.png" alt="Phonics exercise screen">
+            <figcaption>Learning exercises are interactive without over-stimulating to facilitate learning and focus.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/PhonicsApp/phonics-app-exercise2.png" alt="Phonics exercise screen variant">
+            <figcaption>A variety of exercise-types challenge learners, develop complementary skills, and maintain engagement.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/PhonicsApp/phonics-app-correct.png" alt="Correct answer feedback">
+            <figcaption>Frequent and consistent feedback builds confidence.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/PhonicsApp/phonics-app-faq.png" alt="Phonics App FAQ and parent guidance">
+            <figcaption>Guardians and educators are encouraged to understand the learning mechanisms employed by the app.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/PhonicsApp/phonics-app-progress-report.png" alt="Parent progress report with per-phoneme tracking">
+            <figcaption>A comprehensive Admin Portal provides actionable insights for further learning outside the app.</figcaption>
+          </figure>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         DINNERREADY!
+    ============================================================ -->
+    <section class="section-light project-section" id="dinnerready" aria-labelledby="dr-heading">
+      <div class="section-inner section-inner--wide">
+
+        <span class="section-label">Household</span>
+        <h2 id="dr-heading" class="project-section__title">DinnerReady!</h2>
+
+        <div class="project-section__summary">
+          <dl>
+            <dt>Deliverable:</dt>
+            <dd>Full-stack SPA (Vue frontend + Express API) deployed to Render</dd>
+            <dt>Tech Stack:</dt>
+            <dd>Vue 3 + Vite + Node/Express + Turso (cloud SQLite)</dd>
+            <dt>Built with:</dt>
+            <dd>Claude Code (Pro Plan) + ChatGPT (free tier)</dd>
+          </dl>
+        </div>
+
+        <div class="project-section__prose">
+          <p>Meal planning sounds like a solved problem. There are apps for it. There are services that do it entirely: meals designed, grocery lists generated, delivery arranged. The planning itself isn't what makes it hard. What makes it hard is the constraint surface. A real household's meal planning doesn't involve choosing from any recipe. It involves choosing from recipes that fit this week's schedule, that haven't appeared recently, that respect several people's preferences, that can be made in the time actually available on a given night.</p>
+          <p>The apps designed for the general case can't hold that. They can suggest recipes. They can generate shopping lists. Most can't enforce a four-week lookback to prevent repetition, or handle cook-time preferences that vary by day of the week, or enforce limits on consecutive nights of the same cuisine. The constraint complexity isn't unusual. Most households have it. The tools just don't reflect it.</p>
+          <p>DinnerReady! uses a backtracking solver to generate weekly meal plans against a configurable set of rules: cooldown periods between repeated meals, cuisine and category limits, consecutive-day restrictions, seasonal availability, and cook-time preferences by day. It generates up to fifty valid plans in a pass and selects from among them. The four-week history prevents week-to-week repetition without requiring the user to manage it manually.</p>
+          <p>The grocery list groups items by department and syncs across devices. Shopping Mode keeps the screen on. These are not remarkable features. They are the features that make the difference between a tool you use and one you put down.</p>
+        </div>
+
+        <div class="project-section__screenshots">
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/DinnerReady/dinnerready_calendar.png" alt="DinnerReady! weekly meal calendar">
+            <figcaption>Plan your night, week, or even a month in minutes with the automated meal plan generator.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/DinnerReady/dinnerready_recipes.png" alt="Recipe library view">
+            <figcaption>All your recipes are easy to find with tags for search and filtering.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/DinnerReady/dinnerready_recipe-view.png" alt="Individual recipe detail view">
+            <figcaption>Recipe cards show you everything you need to know before cooking.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/DinnerReady/dinnerready_custom-constraints.png" alt="Custom constraint configuration">
+            <figcaption>Constraints builder enables you to program the meal plan generator to match the needs and preferences of your family -- no coding required!</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/DinnerReady/dinnerready_custom-constrants2.png" alt="Additional constraint settings">
+            <figcaption>Fully customizable so that automated meal plans are always right without manual intervention.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/DinnerReady/dinnerready_grocerylist.png" alt="Grocery list grouped by department">
+            <figcaption>A sorted grocery list is automatically generated from your meal plan, plus your weekly staples.</figcaption>
+          </figure>
+          <figure class="project-screenshot">
+            <img src="../shared/assets/images/DinnerReady/dinnerready_stats.png" alt="Meal planning statistics">
+            <figcaption>Use the app for a few weeks and then view your stats: good 'ole fashion fun for data enthusiasts.</figcaption>
+          </figure>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         CTA
+    ============================================================ -->
+    <section class="section-dark projects-cta" aria-label="Get started with Hora">
+      <div class="section-inner" style="text-align: center;">
+        <span class="section-label">Get Started</span>
+        <h2>Start building your own.</h2>
+        <p style="color: var(--dark-text-muted); font-size: var(--text-lg); line-height: var(--leading-relaxed); max-width: 52ch; margin: var(--space-4) auto 0;">Hora guides you through five stages, from initial problem definition to active build. It's the same process used to build the projects shown above.</p>
+        <a href="../app/index.html" class="btn btn-primary" style="margin-top: var(--space-8); display: inline-block;">Open Hora</a>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="../shared/shell.js"></script>
+  <script>Shell.init('projects');</script>
+
+</body>
+</html>

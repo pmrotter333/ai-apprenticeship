@@ -1,0 +1,1415 @@
+/* ============================================================
+   Systems Thinking with AI — Global Design System
+   style.css
+   ============================================================
+   Architecture: split palette (dark hero sections + light content
+   sections), unified by a single amber accent.
+
+   Section color mapping (hub page):
+     .section-dark  → problem, insight, pathways (dark bg)
+     .section-light → proof gallery, tool (light bg)
+   Spoke pages default to light.
+
+   Contents:
+     1. Font faces
+     2. Custom properties
+     3. Reset & base
+     4. Typography
+     5. Layout
+     6. Navigation
+     7. Footer
+     8. Page header (spoke pages)
+     9. Hub sections
+    10. Tool components
+    11. Project grid & cards
+    12. Pathway cards
+    13. Markdown output
+    14. Utilities
+    15. Responsive
+   ============================================================ */
+
+
+/* ============================================================
+   1. FONT FACES
+   ============================================================ */
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('./assets/fonts/dm-sans-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('./assets/fonts/dm-sans-variable-italic.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Newsreader';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('./assets/fonts/newsreader-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Newsreader';
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url('./assets/fonts/newsreader-variable-italic.woff2') format('woff2');
+}
+
+
+/* ============================================================
+   2. CUSTOM PROPERTIES
+   ============================================================ */
+
+:root {
+  /* --- Color: Dark palette (problem, insight, pathways sections) --- */
+  --dark-bg:           #1C1917;
+  --dark-surface:      #252220;
+  --dark-surface-2:    #2E2B28;
+  --dark-border:       #3D3830;
+  --dark-text:         #F5F0E8;
+  --dark-text-muted:   #BDB5AC;
+
+  /* --- Color: Light palette (proof, tool sections; spoke pages) --- */
+  --light-bg:          #FAF9F7;
+  --light-surface:     #F2EDE8;
+  --light-surface-2:   #EDE5DC;
+  --light-border:      #E0D5CB;
+  --light-text:        #1A1614;
+  --light-text-muted:  #6B5E58;
+
+  /* --- Color: Accent (amber — works on both dark and light) --- */
+  --accent:            #C8820A;
+  --accent-hover:      #A36808;
+  --accent-subtle:     rgba(200, 130, 10, 0.12);
+
+  /* --- Typography --- */
+  --font-sans:   'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-serif:  'Newsreader', Georgia, serif;
+  --font-mono:   'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+
+  /* Type scale */
+  --text-xs:   0.75rem;    /*  12px */
+  --text-sm:   0.875rem;   /*  14px */
+  --text-base: 1rem;       /*  16px */
+  --text-lg:   1.125rem;   /*  18px */
+  --text-xl:   1.25rem;    /*  20px */
+  --text-2xl:  1.5rem;     /*  24px */
+  --text-3xl:  1.875rem;   /*  30px */
+  --text-4xl:  2.25rem;    /*  36px */
+  --text-5xl:  3rem;       /*  48px */
+  --text-6xl:  3.75rem;    /*  60px */
+
+  /* Line heights */
+  --leading-tight:  1.2;
+  --leading-snug:   1.35;
+  --leading-normal: 1.6;
+  --leading-relaxed:1.75;
+
+  /* Letter spacing */
+  --tracking-tight:  -0.02em;
+  --tracking-normal:  0em;
+  --tracking-wide:    0.04em;
+  --tracking-widest:  0.1em;
+
+  /* --- Spacing scale --- */
+  --space-1:  0.25rem;   /*  4px */
+  --space-2:  0.5rem;    /*  8px */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-5:  1.25rem;   /* 20px */
+  --space-6:  1.5rem;    /* 24px */
+  --space-8:  2rem;      /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+  --space-20: 5rem;      /* 80px */
+  --space-24: 6rem;      /* 96px */
+  --space-32: 8rem;      /* 128px */
+
+  /* --- Layout --- */
+  --content-width:      44rem;   /* 704px — reading width */
+  --content-width-wide: 68rem;   /* 1088px — grid/tool sections */
+  --content-padding:    var(--space-6);
+  --nav-height:         3.5rem;
+
+  /* --- Transitions --- */
+  --transition-fast:   150ms ease;
+  --transition-base:   250ms ease;
+  --transition-slow:   400ms ease;
+
+  /* --- Radius --- */
+  --radius-sm:  0.25rem;
+  --radius-md:  0.5rem;
+  --radius-lg:  0.75rem;
+  --radius-xl:  1rem;
+}
+
+
+/* ============================================================
+   3. RESET & BASE
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--light-text);
+  background-color: var(--dark-bg); /* starts dark — first section is dark */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, video {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+
+/* ============================================================
+   4. TYPOGRAPHY
+   ============================================================ */
+
+/* Headings use Newsreader serif */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: var(--leading-tight);
+  letter-spacing: var(--tracking-tight);
+}
+
+h1 { font-size: var(--text-5xl); }
+h2 { font-size: var(--text-3xl); }
+h3 { font-size: var(--text-2xl); }
+h4 { font-size: var(--text-xl); }
+
+/* Lede — large introductory paragraph */
+.lede {
+  font-size: var(--text-xl);
+  line-height: var(--leading-relaxed);
+  font-weight: 300;
+}
+
+/* Label — small all-caps UI label */
+.label {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+}
+
+/* Accent text — inline amber highlight */
+.text-accent { color: var(--accent); }
+
+/* Links within prose */
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.prose a:hover {
+  color: var(--accent-hover);
+}
+
+/* Prose content rhythm */
+.prose p + p,
+.prose p + ul,
+.prose p + ol,
+.prose ul + p,
+.prose ol + p {
+  margin-top: var(--space-4);
+}
+
+.prose h2,
+.prose h3 {
+  margin-top: var(--space-10);
+  margin-bottom: var(--space-4);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: var(--space-6);
+}
+
+.prose ul { list-style: disc; }
+.prose ol { list-style: decimal; }
+
+.prose li + li {
+  margin-top: var(--space-2);
+}
+
+/* Blockquote — editorial pull quote using serif */
+blockquote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-2xl);
+  line-height: var(--leading-snug);
+  border-left: 3px solid var(--accent);
+  padding-left: var(--space-6);
+  margin: var(--space-8) 0;
+}
+
+/* Code */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: var(--accent-subtle);
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+}
+
+pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  padding: var(--space-6);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  line-height: var(--leading-relaxed);
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Dark context typography overrides */
+.section-dark h1,
+.section-dark h2,
+.section-dark h3,
+.section-dark h4,
+.section-dark p,
+.section-dark li,
+.section-dark .lede {
+  color: var(--dark-text);
+}
+
+.section-dark .label,
+.section-dark .text-muted {
+  color: var(--dark-text-muted);
+}
+
+.section-dark blockquote {
+  color: var(--dark-text);
+  border-left-color: var(--accent);
+}
+
+.section-dark code {
+  background: rgba(200, 130, 10, 0.15);
+  color: var(--dark-text);
+}
+
+/* Light context text utilities */
+.text-muted { color: var(--light-text-muted); }
+
+
+/* ============================================================
+   5. LAYOUT
+   ============================================================ */
+
+/* Section container — constrains width, centers content */
+.section-inner {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: var(--space-24) var(--content-padding);
+}
+
+/* Wide variant — for project grids, tool section */
+.section-inner--wide {
+  max-width: var(--content-width-wide);
+}
+
+/* Narrow variant — for focused text content */
+.section-inner--narrow {
+  max-width: 36rem;
+}
+
+/* Two-column grid */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-6);
+}
+
+/* Three-column grid */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+
+/* ============================================================
+   6. NAVIGATION
+   ============================================================ */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--nav-height);
+  background-color: var(--dark-bg);
+  border-bottom: 1px solid var(--dark-border);
+}
+
+.site-header__inner {
+  max-width: var(--content-width-wide);
+  margin: 0 auto;
+  padding: 0 var(--content-padding);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+.site-logo {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--dark-text);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.site-logo:hover {
+  color: var(--accent);
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.site-nav a {
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: var(--dark-text-muted);
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] {
+  color: var(--dark-text);
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--accent);
+}
+
+
+/* ============================================================
+   7. FOOTER
+   ============================================================ */
+
+.site-footer {
+  background-color: var(--dark-bg);
+  border-top: 1px solid var(--dark-border);
+}
+
+.site-footer__inner {
+  max-width: var(--content-width-wide);
+  margin: 0 auto;
+  padding: var(--space-8) var(--content-padding);
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.site-footer a {
+  font-size: var(--text-sm);
+  color: var(--dark-text-muted);
+  transition: color var(--transition-fast);
+}
+
+.site-footer a:hover {
+  color: var(--dark-text);
+}
+
+
+/* ============================================================
+   8. PAGE HEADER (spoke pages)
+   ============================================================ */
+
+.page-header {
+  background-color: var(--dark-bg);
+  border-bottom: 1px solid var(--dark-border);
+  padding: var(--space-12) var(--content-padding) var(--space-10);
+}
+
+.page-header > * {
+  max-width: var(--content-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.page-header h1 {
+  color: var(--dark-text);
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.page-header .page-lede {
+  color: var(--dark-text-muted);
+  font-size: var(--text-lg);
+  line-height: var(--leading-relaxed);
+  max-width: 36rem;
+}
+
+/* Breadcrumb */
+.breadcrumb {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--dark-text-muted);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.breadcrumb a {
+  color: var(--dark-text-muted);
+  transition: color var(--transition-fast);
+}
+
+.breadcrumb a:hover {
+  color: var(--accent);
+}
+
+.breadcrumb span {
+  color: var(--accent);
+}
+
+
+/* ============================================================
+   9. HUB PAGE SECTIONS
+   ============================================================ */
+
+/* Dark sections */
+.section-dark {
+  background-color: var(--dark-bg);
+}
+
+/* Light sections */
+.section-light {
+  background-color: var(--light-bg);
+}
+
+/* Section divider — subtle amber rule between major sections */
+.section-divider {
+  width: 3rem;
+  height: 2px;
+  background-color: var(--accent);
+  margin-bottom: var(--space-8);
+}
+
+/* Section label — "Stage 1 / Problem" style label above heading */
+.section-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-4);
+  display: block;
+}
+
+/* Section Problem — hero; biggest type on the page */
+.section-problem .section-inner {
+  padding-top: calc(var(--space-20) + var(--nav-height));
+  padding-bottom: var(--space-24);
+}
+
+.section-problem h1 {
+  font-size: var(--text-6xl);
+  letter-spacing: -0.03em;
+  color: var(--dark-text);
+  margin-bottom: var(--space-5);
+  max-width: 18ch;
+}
+
+.section-problem .lede {
+  color: var(--dark-text-muted);
+  max-width: 48ch;
+}
+
+/* Section Insight */
+.section-insight h2 {
+  color: var(--dark-text);
+  margin-bottom: var(--space-6);
+}
+
+.section-insight p {
+  color: var(--dark-text-muted);
+  max-width: 56ch;
+}
+
+/* Section Proof */
+.section-proof h2 {
+  color: var(--light-text);
+  margin-bottom: var(--space-3);
+}
+
+.section-proof .section-intro {
+  color: var(--light-text-muted);
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-12);
+  max-width: 52ch;
+}
+
+/* Project grid */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  gap: var(--space-6);
+  margin-top: var(--space-10);
+}
+
+.project-card {
+  background-color: var(--light-surface);
+  border: 1px solid var(--light-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: border-color var(--transition-base), transform var(--transition-base);
+}
+
+.project-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+/* Flagship card — spans full width or is visually larger */
+.project-card--flagship {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+  align-items: center;
+  padding: var(--space-8);
+}
+
+/* Flagship card visual slot */
+.project-card__visual {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,0.12);
+}
+
+.project-card__visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+.project-card__tag {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+.project-card__title {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  color: var(--light-text);
+  margin-bottom: var(--space-3);
+  font-weight: 400;
+}
+
+.project-card__desc {
+  font-size: var(--text-sm);
+  color: var(--light-text-muted);
+  line-height: var(--leading-relaxed);
+}
+
+.project-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--accent);
+  margin-top: var(--space-4);
+  transition: gap var(--transition-fast);
+}
+
+.project-card__link:hover {
+  gap: var(--space-3);
+}
+
+/* Cards with top screenshot image */
+.project-card--with-image {
+  padding: 0;
+  overflow: hidden;
+}
+
+.project-card__image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-bottom: 1px solid var(--light-border);
+}
+
+.project-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.project-card--with-image:hover .project-card__image img {
+  transform: scale(1.03);
+}
+
+.project-card__body {
+  padding: var(--space-6);
+}
+
+/* Section Tool (embedded Frustration Audit) */
+.section-tool h2 {
+  color: var(--light-text);
+  margin-bottom: var(--space-4);
+}
+
+.section-tool .section-intro {
+  color: var(--light-text-muted);
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-10);
+  max-width: 52ch;
+}
+
+.tool-cta {
+  margin-top: var(--space-8);
+  font-size: var(--text-sm);
+  color: var(--light-text-muted);
+}
+
+.tool-cta a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Section Pathways */
+.section-pathways h2 {
+  color: var(--dark-text);
+  margin-bottom: var(--space-4);
+}
+
+.section-pathways .section-intro {
+  color: var(--dark-text-muted);
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-10);
+}
+
+.pathway-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--space-4);
+}
+
+.pathway-card {
+  background-color: var(--dark-surface);
+  border: 1px solid var(--dark-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: border-color var(--transition-base), background-color var(--transition-base);
+  display: block;
+}
+
+.pathway-card:hover {
+  border-color: var(--accent);
+  background-color: var(--dark-surface-2);
+}
+
+.pathway-card__label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: var(--space-3);
+  display: block;
+}
+
+.pathway-card__title {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  color: var(--dark-text);
+  font-weight: 400;
+  margin-bottom: var(--space-3);
+}
+
+.pathway-card__desc {
+  font-size: var(--text-sm);
+  color: var(--dark-text-muted);
+  line-height: var(--leading-relaxed);
+}
+
+
+/* ============================================================
+   10. TOOL COMPONENTS
+   ============================================================ */
+
+/* Tier toggle — Prompt Generation vs. BYOK mode switcher */
+.tier-toggle {
+  display: inline-flex;
+  background-color: var(--dark-surface);
+  border: 1px solid var(--dark-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-1);
+  gap: var(--space-1);
+  margin-top: var(--space-6);
+}
+
+.tier-btn {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  padding: var(--space-2) var(--space-4);
+  border-radius: calc(var(--radius-md) - 2px);
+  color: var(--dark-text-muted);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.tier-btn.active,
+.tier-btn[aria-selected="true"] {
+  background-color: var(--accent);
+  color: #fff;
+}
+
+.tier-btn:hover:not(.active) {
+  color: var(--dark-text);
+}
+
+/* Tool wrapper — the Alpine.js component container */
+.tool-wrapper {
+  background-color: var(--light-surface);
+  border: 1px solid var(--light-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  margin-top: var(--space-8);
+}
+
+/* Step indicators — progress dots */
+.step-indicators {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-8);
+}
+
+.step-dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--light-border);
+  transition: background-color var(--transition-base), transform var(--transition-base);
+}
+
+.step-dot.active {
+  background-color: var(--accent);
+  transform: scale(1.4);
+}
+
+.step-dot.complete {
+  background-color: var(--accent);
+  opacity: 0.4;
+}
+
+/* Step counter label */
+.step-counter {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--light-text-muted);
+  margin-bottom: var(--space-3);
+}
+
+/* Step panel */
+.step-panel {
+  min-height: 12rem;
+}
+
+.step-panel__question {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  color: var(--light-text);
+  font-weight: 400;
+  line-height: var(--leading-snug);
+  margin-bottom: var(--space-2);
+}
+
+.step-panel__hint {
+  font-size: var(--text-sm);
+  color: var(--light-text-muted);
+  margin-bottom: var(--space-5);
+  line-height: var(--leading-relaxed);
+}
+
+/* Textarea input */
+.step-textarea {
+  width: 100%;
+  min-height: 8rem;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--light-text);
+  background-color: var(--light-bg);
+  border: 1px solid var(--light-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  resize: vertical;
+  transition: border-color var(--transition-fast);
+  outline: none;
+}
+
+.step-textarea:focus {
+  border-color: var(--accent);
+}
+
+.step-textarea::placeholder {
+  color: var(--light-text-muted);
+  opacity: 0.6;
+}
+
+/* Step navigation buttons */
+.step-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-6);
+  gap: var(--space-4);
+}
+
+/* Buttons */
+.btn {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  transition: background-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  border: none;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--accent-hover);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--light-text-muted);
+  border: 1px solid var(--light-border);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  color: var(--light-text);
+  border-color: var(--light-text-muted);
+}
+
+.btn-ghost--dark {
+  color: var(--dark-text-muted);
+  border-color: var(--dark-border);
+}
+
+.btn-ghost--dark:hover:not(:disabled) {
+  color: var(--dark-text);
+  border-color: var(--dark-text-muted);
+}
+
+/* Output panel */
+.output-panel {
+  margin-top: var(--space-8);
+  border-top: 1px solid var(--light-border);
+  padding-top: var(--space-8);
+}
+
+.output-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-5);
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.output-panel__label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-widest);
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.btn-copy {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  padding: var(--space-2) var(--space-5);
+  border-radius: var(--radius-md);
+  background-color: var(--accent);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.btn-copy:hover {
+  background-color: var(--accent-hover);
+}
+
+.btn-copy:disabled {
+  opacity: 0.6;
+}
+
+.output-hint {
+  margin-top: var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--light-text-muted);
+  line-height: var(--leading-relaxed);
+}
+
+/* BYOK API key input */
+.apikey-section {
+  margin-top: var(--space-6);
+  padding: var(--space-5);
+  background-color: var(--dark-surface);
+  border: 1px solid var(--dark-border);
+  border-radius: var(--radius-md);
+}
+
+.apikey-section__note {
+  font-size: var(--text-xs);
+  color: var(--dark-text-muted);
+  line-height: var(--leading-relaxed);
+  margin-bottom: var(--space-4);
+}
+
+.apikey-input {
+  width: 100%;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--dark-text);
+  background-color: var(--dark-bg);
+  border: 1px solid var(--dark-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.apikey-input:focus {
+  border-color: var(--accent);
+}
+
+
+/* ============================================================
+   11. STARTER KIT DOWNLOADS
+   ============================================================ */
+
+.starter-kits {
+  margin-top: var(--space-16);
+  padding-top: var(--space-10);
+  border-top: 1px solid var(--light-border);
+}
+
+.download-list {
+  margin-top: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.download-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast);
+}
+
+.download-list a:hover {
+  color: var(--accent-hover);
+}
+
+
+/* ============================================================
+   12. MARKDOWN OUTPUT RENDERING
+   ============================================================ */
+
+/* The container that receives Toolkit.renderMarkdown() output */
+.output-rendered {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--light-text);
+  background-color: var(--light-bg);
+  border: 1px solid var(--light-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+  max-height: 28rem;
+  overflow-y: auto;
+}
+
+.output-rendered h1,
+.output-rendered h2,
+.output-rendered h3,
+.output-rendered h4 {
+  font-family: var(--font-serif);
+  color: var(--light-text);
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-3);
+}
+
+.output-rendered h1 { font-size: var(--text-2xl); }
+.output-rendered h2 { font-size: var(--text-xl); }
+.output-rendered h3 { font-size: var(--text-lg); }
+
+.output-rendered h1:first-child,
+.output-rendered h2:first-child {
+  margin-top: 0;
+}
+
+.output-rendered p { margin-bottom: var(--space-4); }
+
+.output-rendered ul,
+.output-rendered ol {
+  padding-left: var(--space-6);
+  margin-bottom: var(--space-4);
+}
+
+.output-rendered ul { list-style: disc; }
+.output-rendered ol { list-style: decimal; }
+
+.output-rendered li + li { margin-top: var(--space-2); }
+
+.output-rendered strong { font-weight: 600; }
+.output-rendered em { font-style: italic; }
+
+.output-rendered code {
+  background: var(--accent-subtle);
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+}
+
+.output-rendered pre {
+  background: var(--light-surface);
+  border: 1px solid var(--light-border);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  margin-bottom: var(--space-4);
+}
+
+.output-rendered pre code {
+  background: none;
+  padding: 0;
+}
+
+.output-rendered blockquote {
+  border-left: 3px solid var(--accent);
+  padding-left: var(--space-4);
+  color: var(--light-text-muted);
+  font-style: italic;
+  margin: var(--space-4) 0;
+  font-size: var(--text-base);
+}
+
+/* Streaming indicator */
+.output-streaming::after {
+  content: '▋';
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+
+/* ============================================================
+   13. UTILITIES
+   ============================================================ */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+
+.mt-auto { margin-top: auto; }
+.ml-auto { margin-left: auto; }
+
+/* Focus visible — keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+
+/* ============================================================
+   14. PROJECTS PAGE
+   ============================================================ */
+
+.project-section {
+  border-top: 1px solid var(--light-border);
+}
+
+.project-section:first-of-type {
+  border-top: none;
+}
+
+.project-section__title {
+  font-size: var(--text-3xl);
+  color: var(--light-text);
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-8);
+}
+
+.project-section__summary {
+  max-width: 68ch;
+  margin-bottom: var(--space-8);
+}
+
+.project-section__summary dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: var(--space-1) var(--space-4);
+  margin: 0;
+}
+
+.project-section__summary dt {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--light-text);
+  letter-spacing: 0.02em;
+  padding-top: 2px;
+}
+
+.project-section__summary dd {
+  font-size: var(--text-sm);
+  color: var(--light-text-muted);
+  margin: 0;
+}
+
+.project-section__prose {
+  max-width: 68ch;
+}
+
+.project-section__prose p {
+  font-size: var(--text-base);
+  line-height: var(--leading-relaxed);
+  color: var(--light-text-muted);
+}
+
+.project-section__prose p + p {
+  margin-top: var(--space-4);
+}
+
+.project-section__screenshots {
+  margin-top: var(--space-12);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-10);
+}
+
+.project-screenshot {
+  background-color: var(--light-surface);
+  border: 1px solid var(--light-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.project-screenshot img {
+  width: 100%;
+  display: block;
+}
+
+.project-screenshot figcaption {
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--text-sm);
+  color: var(--light-text-muted);
+  line-height: var(--leading-relaxed);
+  border-top: 1px solid var(--light-border);
+}
+
+.projects-cta .section-inner {
+  padding-top: var(--space-20);
+  padding-bottom: var(--space-20);
+}
+
+.projects-cta h2 {
+  color: var(--dark-text);
+  margin-top: var(--space-2);
+}
+
+
+/* ============================================================
+   15. RESPONSIVE
+   ============================================================ */
+
+/* Tablet — below 768px */
+@media (max-width: 768px) {
+  :root {
+    --content-padding: var(--space-5);
+  }
+
+  h1 { font-size: var(--text-4xl); }
+  h2 { font-size: var(--text-2xl); }
+
+  .section-problem h1 {
+    font-size: var(--text-4xl);
+  }
+
+  .section-problem .section-inner {
+    padding-top: calc(var(--space-20) + var(--nav-height));
+    padding-bottom: var(--space-20);
+  }
+
+  .section-inner {
+    padding-top: var(--space-16);
+    padding-bottom: var(--space-16);
+  }
+
+  .project-card--flagship {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-2,
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .step-nav {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .step-nav .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .output-panel__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Mobile — below 480px */
+@media (max-width: 480px) {
+  :root {
+    --content-padding: var(--space-4);
+  }
+
+  .section-problem h1 {
+    font-size: var(--text-3xl);
+  }
+
+  .lede {
+    font-size: var(--text-lg);
+  }
+
+  /* Collapse nav links on small screens */
+  .site-nav {
+    display: none;
+  }
+
+  /* Tool wrapper: remove padding on very small screens */
+  .tool-wrapper {
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+  }
+
+  .pathway-cards {
+    grid-template-columns: 1fr;
+  }
+}
