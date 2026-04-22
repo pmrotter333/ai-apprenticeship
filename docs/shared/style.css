@@ -1398,9 +1398,24 @@ pre code {
     font-size: var(--text-lg);
   }
 
-  /* Collapse nav links on small screens */
+  /* Stack nav below logo on small screens */
+  .site-header {
+    height: auto;
+    padding: var(--space-3) 0;
+  }
+
+  .site-header__inner {
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
   .site-nav {
-    display: none;
+    gap: var(--space-4);
+  }
+
+  /* Extra top padding on hero to clear the taller two-line header */
+  .section-problem .section-inner {
+    padding-top: calc(var(--space-20) + var(--nav-height) + var(--space-8));
   }
 
   /* Tool wrapper: remove padding on very small screens */
