@@ -2,7 +2,13 @@
 .claude/
 
 # Internal working documents (not for public repo)
-*.md
+CLAUDE.md
+PROJECT_CONTEXT.md
+PROJECT_1_ARCHITECTURE.md
+MESSAGING_FRAMEWORK.md
+Design Decisions.md
+methodology/
+walkthroughs/
 
 # Logs
 logs
