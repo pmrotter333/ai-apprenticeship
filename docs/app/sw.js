@@ -4,7 +4,7 @@
    Network-first for cross-origin AI API calls.
    ============================================================ */
 
-const CACHE_NAME = 'hora-v22';
+const CACHE_NAME = 'hora-v23';
 
 const APP_SHELL = [
   './',

@@ -22,10 +22,12 @@ const DB = (() => {
     sessions: '++id, projectId, startedAt',
   });
 
-  /* Surface IndexedDB-level errors (quota exceeded, blocked open, etc.) to the app */
-  db.on('error', err => {
-    console.error('[Hora] IndexedDB error:', err);
-    window.dispatchEvent(new CustomEvent('hora:db-error', { detail: { message: err.message || String(err) } }));
+  /* Surface IndexedDB-level errors (quota exceeded, blocked open, etc.) to the app.
+     Dexie has no global 'error' event; use 'blocked' for open-blocked and rely on
+     per-operation .catch() elsewhere. */
+  db.on('blocked', () => {
+    console.warn('[Hora] IndexedDB open blocked by another tab');
+    window.dispatchEvent(new CustomEvent('hora:db-error', { detail: { message: 'Database is blocked by another open tab. Close other Hora tabs and reload.' } }));
   });
 
   /* ----------------------------------------------------------
