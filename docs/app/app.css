@@ -1902,6 +1902,7 @@ details[open] .collab-guide__chevron {
   justify-content: center;
   z-index: 500;
   padding: var(--space-4);
+  overflow-y: auto;
 }
 
 .decision-modal {
@@ -1910,6 +1911,8 @@ details[open] .collab-guide__chevron {
   padding: var(--space-6);
   width: 100%;
   max-width: 28rem;
+  max-height: calc(100dvh - var(--space-8));
+  overflow-y: auto;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
